@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>راهنمای آپلود پروژه Vue-3 در GitHub Pages</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"
+        type="text/css" />
+    <style>
+        :root {
+            --vue-green: #42b883;
+            --vue-dark: #35495e;
+            --vue-green-light: #42b88322;
+            --vue-green-hover: #3daa76;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --text-light: #6c757d;
+            --border-color: #e9ecef;
+            --code-bg: #2d2d2d;
+            --code-text: #f8f8f2;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --toc-h2-color: var(--vue-dark);
+            --section-h2-color: var(--vue-dark);
+            --section-h3-color: var(--vue-dark);
+            --step-bg: #f8f9fa;
+            --config-file-bg: #f0f7f4;
+            --folder-structure-bg: #f8f9fa;
+            --folder-color: #6d4c41;
+            --file-color: var(--vue-dark);
+            --code-header-bg: #1a1a2e;
+            --info-box-default-bg: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+            --info-box-warning-bg: linear-gradient(135deg, #fff3e0, #fff8e1);
+            --info-box-info-bg: linear-gradient(135deg, #e3f2fd, #e8eaf6);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-color: #e0e0e0;
+            --text-light: #a0a0a0;
+            --border-color: #2a2a4a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --vue-green-light: rgba(66, 184, 131, 0.15);
+            --toc-h2-color: #e0e0e0;
+            --section-h2-color: #e0e0e0;
+            --section-h3-color: #e0e0e0;
+            --step-bg: #1e2a45;
+            --config-file-bg: #1a2a3a;
+            --folder-structure-bg: #1e2a45;
+            --folder-color: #81c784;
+            --file-color: #e0e0e0;
+            --code-header-bg: #0f0f23;
+            --info-box-default-bg: linear-gradient(135deg, #1b3a2a, #1a3020);
+            --info-box-warning-bg: linear-gradient(135deg, #3a2a1a, #302a10);
+            --info-box-info-bg: linear-gradient(135deg, #1a2a3a, #1a2030);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--vue-dark) 0%, #2c3e50 100%);
+            color: white;
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2342b883' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .vue-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: var(--vue-green);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(66, 184, 131, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .vue-logo svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(66, 184, 131, 0.2);
+            border: 1px solid rgba(66, 184, 131, 0.4);
+            color: var(--vue-green);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .toc h2 {
+            color: var(--toc-h2-color);
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toc h2::before {
+            content: '📑';
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+
+        .toc-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            background: var(--vue-green-light);
+            color: var(--vue-green);
+            transform: translateX(-4px);
+        }
+
+        .toc-list .step-num {
+            background: var(--vue-green);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 35px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--vue-green-light);
+        }
+
+        .section-number {
+            background: linear-gradient(135deg, var(--vue-green), var(--vue-green-hover));
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            color: var(--section-h2-color);
+            font-weight: 700;
+        }
+
+        .section h3 {
+            font-size: 1.15rem;
+            color: var(--section-h3-color);
+            margin: 22px 0 12px;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 14px;
+            color: var(--text-color);
+        }
+
+        .section ul,
+        .section ol {
+            margin: 12px 0 16px 0;
+            padding-right: 24px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 10px;
+            margin: 16px 0;
+            overflow: hidden;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .code-header {
+            background: var(--code-header-bg);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .code-header .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-header .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-header .dot.red {
+            background: #ff5f56;
+        }
+
+        .code-header .dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .code-header .dot.green {
+            background: #27c93f;
+        }
+
+        .code-header .lang {
+            color: #888;
+            font-size: 0.8rem;
+            font-family: 'Vazirmatn', monospace;
+        }
+
+        .code-block pre {
+            padding: 18px;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--code-text);
+            direction: ltr;
+            display: block;
+        }
+
+        /* Inline code */
+        .inline-code {
+            background: var(--vue-green-light);
+            color: var(--text-color);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        /* Info/Warning boxes */
+        .info-box {
+            background: var(--info-box-default-bg);
+            border-right: 4px solid var(--vue-green);
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin: 18px 0;
+        }
+
+        .info-box.warning {
+            background: var(--info-box-warning-bg);
+            border-right-color: #ff9800;
+        }
+
+        .info-box.info {
+            background: var(--info-box-info-bg);
+            border-right-color: #2196f3;
+        }
+
+        .info-box .info-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 16px;
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--step-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .step-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--vue-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        /* GitHub Pages config file */
+        .config-file {
+            background: var(--config-file-bg);
+            border: 2px dashed var(--vue-green);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .config-file .file-name {
+            font-weight: 700;
+            color: var(--section-h2-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Folder structure */
+        .folder-structure {
+            background: var(--folder-structure-bg);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            direction: ltr;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            margin: 14px 0;
+        }
+
+        .folder-structure .folder {
+            color: var(--folder-color);
+        }
+
+        .folder-structure .file {
+            color: var(--file-color);
+        }
+
+        .folder-structure .comment {
+            color: var(--text-light);
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--vue-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(66, 184, 131, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 24px rgba(66, 184, 131, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--vue-dark);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .footer a {
+            color: var(--vue-green);
+            text-decoration: none;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 200;
+            color: var(--text-color);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        [data-theme="dark"] .theme-toggle .icon-sun {
+            display: inline;
+        }
+
+        [data-theme="dark"] .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        :root:not([data-theme="dark"]) .theme-toggle .icon-sun {
+            display: none;
+        }
+
+        :root:not([data-theme="dark"]) .theme-toggle .icon-moon {
+            display: inline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 15px 60px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .section {
+                padding: 22px 18px;
+            }
+
+            .section h2 {
+                font-size: 1.2rem;
+            }
+
+            .toc {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="vue-logo">
+                <svg viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)">
+                        <g transform="translate(178.06 235.01)">
+                            <path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z"
+                                fill="#41b883" />
+                        </g>
+                        <g transform="translate(178.06 235.01)">
+                            <path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z"
+                                fill="#34495e" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <h1>راهنمای آپلود پروژه Vue-3 در GitHub Pages</h1>
+            <p>قدم به قدم، از صفر تا استقرار پروژه در GitHub Pages</p>
+            <div class="badge-row">
+                <span class="badge">Vue 3</span>
+                <span class="badge">GitHub Pages</span>
+                <span class="badge">Vite</span>
+                <span class="badge">رایگان</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h2>فهرست مطالب</h2>
+            <ol class="toc-list">
+                <li><a href="#prerequisites"><span class="step-num">۱</span> پیش‌نیازها و شرایط لازم</a></li>
+                <li><a href="#create-project"><span class="step-num">۲</span> ساخت پروژه Vue 3 با Vite</a></li>
+                <li><a href="#github-repo"><span class="step-num">۳</span> ساخت مخزن (Repository) در گیت‌هاب</a></li>
+                <li><a href="#push-code"><span class="step-num">۴</span> ارسال کد به گیت‌هاب</a></li>
+                <li><a href="#configure-base"><span class="step-num">۵</span> تنظیم مسیر پایه (Base Path)</a></li>
+                <li><a href="#gh-pages-deploy"><span class="step-num">۶</span> استقرار با gh-pages</a></li>
+                <li><a href="#github-actions"><span class="step-num">۷</span> استقرار با GitHub Actions (روش
+                        پیشرفته)</a></li>
+                <li><a href="#deploy"><span class="step-num">۸</span> اجرای نهایی و انتشار</a></li>
+                <li><a href="#custom-domain"><span class="step-num">۹</span> تنظیم دامنه اختصاصی (اختیاری)</a></li>
+                <li><a href="#troubleshooting"><span class="step-num">۱۰</span> عیب‌یابی و مشکلات رایج</a></li>
+            </ol>
+        </nav>
+
+        <!-- Section 1: Prerequisites -->
+        <section class="section" id="prerequisites">
+            <div class="section-header">
+                <div class="section-number">۱</div>
+                <h2>پیش‌نیازها و شرایط لازم</h2>
+            </div>
+
+            <p>قبل از شروع انتشار پروژه Vue 3 در GitHub Pages، مطمئن شوید که ابزارهای زیر را روی سیستم خود نصب دارید:
+            </p>
+
+            <div class="step">
+                <div class="step-icon">①</div>
+                <div>
+                    <strong>Node.js نسخه ۱۸ یا بالاتر</strong>
+                    <p>برای اجرای پروژه و مدیریت بسته‌ها نیاز به Node.js دارید.</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># بررسی نسخه Node.js
+node --version
+
+# بررسی نسخه npm
+npm --version</code></pre>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">②</div>
+                <div>
+                    <strong>Git نصب شده</strong>
+                    <p>برای مدیریت نسخه و ارسال کد به گیت‌هاب به Git نیاز دارید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">③</div>
+                <div>
+                    <strong>حساب کاربری گیت‌هاب</strong>
+                    <p>یک حساب رایگان در <span class="inline-code">github.com</span> داشته باشید.</p>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 نکته</div>
+                <p>اگر هنوز Node.js را نصب ندارید، از سایت رسمی <a href="https://nodejs.org"
+                        target="_blank">nodejs.org</a> نسخه LTS را دانلود و نصب کنید.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Create Project -->
+        <section class="section" id="create-project">
+            <div class="section-header">
+                <div class="section-number">۲</div>
+                <h2>ساخت پروژه Vue 3 با Vite</h2>
+            </div>
+
+            <p>با استفاده از دستور زیر یک پروژه جدید Vue 3 با ابزار Vite بسازید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># ساخت پروژه جدید Vue 3
+npm create vite@latest my-vue-app -- --template vue
+
+# ورود به پوشه پروژه
+cd my-vue-app
+
+# نصب وابستگی‌ها
+npm install
+
+# اجرای پروژه در حالت توسعه
+npm run dev</code></pre>
+            </div>
+
+            <p>بعد از اجرای دستور بالا، پروژه شما در آدرس <span class="inline-code">http://localhost:5173</span> اجرا
+                می‌شود.</p>
+
+            <h3>ساختار پروژه</h3>
+
+            <div class="folder-structure">
+                <span class="folder">my-vue-app/</span>
+                ├── <span class="folder">node_modules/</span>
+                ├── <span class="folder">public/</span>
+                │ └── <span class="file">favicon.ico</span>
+                ├── <span class="folder">src/</span>
+                │ ├── <span class="folder">assets/</span>
+                │ ├── <span class="folder">components/</span>
+                │ ├── <span class="file">App.vue</span>
+                │ └── <span class="file">main.js</span>
+                ├── <span class="file">index.html</span>
+                ├── <span class="file">package.json</span>
+                ├── <span class="file">vite.config.js</span> <span class="comment">← تنظیمات مهم اینجاست</span>
+                └── <span class="file">.gitignore</span>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">✅ خوب است بدانید</div>
+                <p>Vite ابزار ساخت و باندل پروژه‌های فرانت‌اند است که سرعت بالایی در توسعه و ساخت (build) دارد و جایگزین
+                    Webpack در پروژه‌های Vue 3 شده است.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: GitHub Repo -->
+        <section class="section" id="github-repo">
+            <div class="section-header">
+                <div class="section-number">۳</div>
+                <h2>ساخت مخزن (Repository) در گیت‌هاب</h2>
+            </div>
+
+            <p>مراحل زیر را برای ساخت یک مخزن جدید در GitHub دنبال کنید:</p>
+
+            <div class="step">
+                <div class="step-icon">۱</div>
+                <div>
+                    <strong>وارد حساب گیت‌هاب خود شوید</strong>
+                    <p>به آدرس <span class="inline-code">github.com</span> بروید و وارد شوید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۲</div>
+                <div>
+                    <strong>مخزن جدید بسازید</strong>
+                    <p>روی دکمه <strong>+</strong> در بالای صفحه و سپس <strong>New repository</strong> کلیک کنید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۳</div>
+                <div>
+                    <strong>نام مخزن را وارد کنید</strong>
+                    <p>نام مخزن باید با فرمت <span class="inline-code">username.github.io</span> باشد تا به عنوان سایت
+                        اصلی شما عمل کند، یا هر نام دیگری برای پروژه‌های فرعی.</p>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 نکته درباره نام مخزن</div>
+                <p>اگر نام مخزن را <span class="inline-code">username.github.io</span> بگذارید (جایی که username نام
+                    کاربری شماست)، سایت شما در آدرس <span class="inline-code">https://username.github.io</span> نمایش
+                    داده می‌شود. اگر نام دیگری مثل <span class="inline-code">my-project</span> بگذارید، آدرس سایت <span
+                        class="inline-code">https://username.github.io/my-project</span> خواهد بود.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۴</div>
+                <div>
+                    <strong>مخزن را خالی نگه دارید</strong>
+                    <p>گزینه‌های اضافی مثل README یا .gitignore را فعال نکنید. مخزن کاملاً خالی باشد.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Push Code -->
+        <section class="section" id="push-code">
+            <div class="section-header">
+                <div class="section-number">۴</div>
+                <h2>ارسال کد به گیت‌هاب</h2>
+            </div>
+
+            <p>حالا باید کد پروژه خود را به مخزن گیت‌هاب ارسال کنید. دستورات زیر را در ترمینال و در پوشه پروژه اجرا
+                کنید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># مقداردهی اولیه مخزن گیت
+git init
+
+# اضافه کردن تمام فایل‌ها
+git add .
+
+# ایجاد اولین کامیت
+git commit -m "اولین کامیت - پروژه Vue 3"
+
+# تنظیم شاخه اصلی
+git branch -M main
+
+# اضافه کردن مخزن ریموت (نام کاربری خود را جایگزین کنید)
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+
+# ارسال کد به گیت‌هاب
+git push -u origin main</code></pre>
+            </div>
+
+            <div class="info-box warning">
+                <div class="info-title">⚠️ مهم</div>
+                <p>به جای <span class="inline-code">YOUR-USERNAME</span> نام کاربری گیت‌هاب خود و به جای <span
+                        class="inline-code">YOUR-REPO-NAME</span> نام مخزنی که ساختید را وارد کنید.</p>
+            </div>
+
+            <h3>احراز هویت با GitHub CLI (اختیاری)</h3>
+            <p>اگر با مشکل احراز هویت مواجه شدید، می‌توانید از <span class="inline-code">GitHub CLI</span> استفاده کنید:
+            </p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># نصب GitHub CLI
+sudo apt install gh
+
+# ورود به حساب
+gh auth login</code></pre>
+            </div>
+        </section>
+
+        <!-- Section 5: Configure Base -->
+        <section class="section" id="configure-base">
+            <div class="section-header">
+                <div class="section-number">۵</div>
+                <h2>تنظیم مسیر پایه (Base Path)</h2>
+            </div>
+
+            <p>یکی از مهم‌ترین مراحل، تنظیم <span class="inline-code">base</span> در فایل <span
+                    class="inline-code">vite.config.js</span> است. این تنظیم مشخص می‌کند که فایل‌های پروژه در چه مسیری
+                قرار می‌گیرند.</p>
+
+            <h3>حالت ۱: پروژه اصلی (username.github.io)</h3>
+            <p>اگر نام مخزن شما <span class="inline-code">username.github.io</span> باشد:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: '/',  // برای پروژه اصلی
+})</code></pre>
+                </div>
+            </div>
+
+            <h3>حالت ۲: پروژه فرعی (username.github.io/my-project)</h3>
+            <p>اگر نام مخزن شما مثلاً <span class="inline-code">my-project</span> باشد:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: '/my-project/',  // نام مخزن خود را اینجا قرار دهید
+})</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <div class="info-title">⚠️ نکته حیاتی</div>
+                <p>اگر <span class="inline-code">base</span> را به درستی تنظیم نکنید، تمام فایل‌های CSS، JavaScript و
+                    تصاویر پروژه شما یافت نخواهند شد و صفحه سفید می‌بینید!</p>
+            </div>
+
+            <h3>روش خودکار (پیشنهادی)</h3>
+            <p>می‌توانید <span class="inline-code">base</span> را بر اساس محیط اجرا تنظیم کنید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: process.env.NODE_ENV === 'production' 
+    ? '/my-project/' 
+    : '/',
+})</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: gh-pages -->
+        <section class="section" id="gh-pages-deploy">
+            <div class="section-header">
+                <div class="section-number">۶</div>
+                <h2>استقرار با بسته gh-pages</h2>
+            </div>
+
+            <p>ساده‌ترین روش برای انتشار پروژه Vue 3 در GitHub Pages، استفاده از بسته <span
+                    class="inline-code">gh-pages</span> است.</p>
+
+            <h3>مرحله ۱: نصب بسته gh-pages</h3>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code>npm install -D gh-pages</code></pre>
+            </div>
+
+            <h3>مرحله ۲: اضافه کردن اسکریپت به package.json</h3>
+
+            <div class="config-file">
+                <div class="file-name">📄 package.json</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">json</span>
+                    </div>
+                    <pre><code>{
+  "name": "my-vue-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "gh-pages": "^6.1.0",
+    "vite": "^5.0.0"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 توضیح اسکریپت‌ها</div>
+                <p><span class="inline-code">predeploy</span>: قبل از اجرای deploy، به صورت خودکار اجرا می‌شود و پروژه
+                    را build می‌کند.</p>
+                <p><span class="inline-code">deploy</span>: محتوای پوشه <span class="inline-code">dist</span> را به شاخه
+                    <span class="inline-code">gh-pages</span> ارسال می‌کند.</p>
+            </div>
+
+            <h3>مرحله ۳: اجرای استقرار</h3>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># اجرای استقرار
+npm run deploy</code></pre>
+            </div>
+
+            <p>بعد از اجرای این دستور، پروژه شما به صورت خودکار build شده و در GitHub Pages منتشر می‌شود.</p>
+        </section>
+
+        <!-- Section 7: GitHub Actions -->
+        <section class="section" id="github-actions">
+            <div class="section-header">
+                <div class="section-number">۷</div>
+                <h2>استقرار با GitHub Actions (روش پیشرفته)</h2>
+            </div>
+
+            <p>روش حرفه‌ای‌تر استفاده از <strong>GitHub Actions</strong> است که به صورت خودکار پروژه شما را در هر بار
+                push به شاخه <span class="inline-code">main</span> build و deploy می‌کند.</p>
+
+            <h3>مرحله ۱: فعال‌سازی GitHub Pages</h3>
+            <p>در صفحه مخزن خود در گیت‌هاب:</p>
+            <ol>
+                <li>به بخش <strong>Settings</strong> بروید</li>
+                <li>از منوی سمت راست روی <strong>Pages</strong> کلیک کنید</li>
+                <li>در بخش <strong>Source</strong> گزینه <strong>GitHub Actions</strong> را انتخاب کنید</li>
+            </ol>
+
+            <h3>مرحله ۲: ساخت فایل Workflow</h3>
+            <p>فایل زیر را در مسیر <span class="inline-code">.github/workflows/deploy.yml</span> بسازید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 .github/workflows/deploy.yml</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">yaml</span>
+                    </div>
+                    <pre><code>name: Deploy Vue 3 to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with Vite
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">✅ مزایای GitHub Actions</div>
+                <ul>
+                    <li>استقرار خودکار در هر بار push به شاخه main</li>
+                    <li>نیازی به نصب بسته gh-pages نیست</li>
+                    <li>امکان استقرار چند پروژه با workflow‌های جداگانه</li>
+                    <li>مدیریت نسخه و تاریخچه استقرار</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 8: Final Deploy -->
+        <section class="section" id="deploy">
+            <div class="section-header">
+                <div class="section-number">۸</div>
+                <h2>اجرای نهایی و انتشار</h2>
+            </div>
+
+            <p>مراحل نهایی برای انتشار پروژه:</p>
+
+            <div class="step">
+                <div class="step-icon">۱</div>
+                <div>
+                    <strong>ساخت پروژه</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run build</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۲</div>
+                <div>
+                    <strong>پیش‌نمایش محلی</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run preview</code></pre>
+                    </div>
+                    <p>پروژه را در حالت پیش‌نمایش بررسی کنید تا مطمئن شوید همه چیز درست کار می‌کند.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۳</div>
+                <div>
+                    <strong>ارسال تغییرات به گیت‌هاب</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>git add .
+git commit -m "تنظیم استقرار در GitHub Pages"
+git push origin main</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۴</div>
+                <div>
+                    <strong>انتشار با gh-pages (اگر از روش gh-pages استفاده می‌کنید)</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run deploy</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">🎉 تبریک!</div>
+                <p>پروژه Vue 3 شما اکنون در GitHub Pages منتشر شده است! چند دقیقه صبر کنید و سپس آدرس سایت خود را در
+                    مرورگر باز کنید.</p>
+            </div>
+        </section>
+
+        <!-- Section 9: Custom Domain -->
+        <section class="section" id="custom-domain">
+            <div class="section-header">
+                <div class="section-number">۹</div>
+                <h2>تنظیم دامنه اختصاصی (اختیاری)</h2>
+            </div>
+
+            <p>اگر می‌خواهید از دامنه اختصاصی خود استفاده کنید، مراحل زیر را دنبال کنید:</p>
+
+            <h3>مرحله ۱: ساخت فایل CNAME</h3>
+
+            <div class="config-file">
+                <div class="file-name">📄 public/CNAME</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">text</span>
+                    </div>
+                    <pre><code>yourdomain.com</code></pre>
+                </div>
+            </div>
+
+            <h3>مرحله ۲: تنظیم DNS</h3>
+            <p>در تنظیمات DNS دامنه خود، رکوردهای زیر را اضافه کنید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">dns</span>
+                </div>
+                <pre><code># رکورد A
+Type: A
+Name: @
+Value: 185.199.108.153
+
+Type: A
+Name: @
+Value: 185.199.109.153
+
+Type: A
+Name: @
+Value: 185.199.110.153
+
+Type: A
+Name: @
+Value: 185.199.111.153
+
+# رکورد CNAME (فقط برای ساب‌دامنه)
+Type: CNAME
+Name: www
+Value: username.github.io</code></pre>
+            </div>
+
+            <h3>مرحله ۳: فعال‌سازی HTTPS</h3>
+            <p>در بخش Pages تنظیمات مخزن، گزینه <strong>Enforce HTTPS</strong> را فعال کنید.</p>
+
+            <div class="info-box info">
+                <div class="info-title">💡 زمان اعمال تغییرات DNS</div>
+                <p>تغییرات DNS ممکن است تا ۲۴ ساعت زمان ببرد تا فعال شوند. صبور باشید.</p>
+            </div>
+        </section>
+
+        <!-- Section 10: Troubleshooting -->
+        <section class="section" id="troubleshooting">
+            <div class="section-header">
+                <div class="section-number">۱۰</div>
+                <h2>عیب‌یابی و مشکلات رایج</h2>
+            </div>
+
+            <h3>❌ صفحه سفید نمایش داده می‌شود</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>تنظیم <span class="inline-code">base</span> در فایل <span class="inline-code">vite.config.js</span>
+                    اشتباه است.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> مقدار <span class="inline-code">base</span> را مطابق با نام مخزن خود تنظیم کنید.
+                (بخش ۵ را مرور کنید)</p>
+
+            <h3>❌ فایل‌های CSS و JS یافت نمی‌شوند</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>مسیرهای مطلق در کد شما با GitHub Pages سازگار نیستند.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> از مسیرهای نسبی استفاده کنید و مطمئن شوید <span class="inline-code">base</span>
+                به درستی تنظیم شده است.</p>
+
+            <h3>❌ خطا در مسیرهای روتینگ (Router)</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>اگر از Vue Router با حالت history استفاده می‌کنید، GitHub Pages از آن پشتیبانی نمی‌کند.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> از حالت <span class="inline-code">hash</span> در Vue Router استفاده کنید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 src/router/index.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { createRouter, createWebHashHistory } from 'vue-router'
+
+const router = createRouter({
+  history: createWebHashHistory(),  // ← استفاده از hash mode
+  routes: [
+    // مسیرهای خود را اینجا تعریف کنید
+  ]
+})
+
+export default router</code></pre>
+                </div>
+            </div>
+
+            <h3>❌ خطای 404 هنگام بارگذاری مستقیم صفحات</h3>
+            <div class="info-box info">
+                <div class="info-title">💡 راه‌حل</div>
+                <p>GitHub Pages فقط فایل <span class="inline-code">index.html</span> اصلی را سرو می‌کند. برای روتینگ، از
+                    hash mode استفاده کنید یا فایل <span class="inline-code">404.html</span> سفارشی بسازید.</p>
+            </div>
+
+            <h3>❌ بسته gh-pages خطا می‌دهد</h3>
+            <p>اگر با خطای مجوز مواجه شدید:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># تنظیم نام کاربری و ایمیل گیت
+git config user.name "YOUR-USERNAME"
+git config user.email "YOUR-EMAIL@example.com"
+
+# دوباره اجرا کنید
+npm run deploy</code></pre>
+            </div>
+
+            <h3>📊 خلاصه تنظیمات بر اساس نوع مخزن</h3>
+
+            <div class="config-file">
+                <div class="file-name">📋 جدول مقایسه تنظیمات</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">text</span>
+                    </div>
+                    <pre><code>┌─────────────────────────────┬──────────────────────────────────────┐
+│         نوع مخزن            │               تنظیم base             │
+├─────────────────────────────┼──────────────────────────────────────┤
+│ username.github.io          │ base: '/'                            │
+├─────────────────────────────┼──────────────────────────────────────┤
+│ username.github.io/my-app   │ base: '/my-app/'                     │
+├─────────────────────────────┼──────────────────────────────────────┤
+│ دامنه اختصاصی               │ base: '/'                            │
+└─────────────────────────────┴──────────────────────────────────────┘</code></pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>ساخته شده با ❤️ برای جامعه توسعه‌دهندگان فارسی‌زبان</p>
+        <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.6;">آخرین به‌روزرسانی: مرداد ۱۴۰۵</p>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="تغییر حالت نمایش">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script>
+        // Dark Mode Toggle
+        (function () {
+            var themeToggle = document.getElementById('themeToggle');
+            var html = document.documentElement;
+            var storageKey = 'theme-preference';
+
+            // Get saved theme or detect system preference
+            function getThemePreference() {
+                var stored = localStorage.getItem(storageKey);
+                if (stored) return stored;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            // Apply theme
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    html.setAttribute('data-theme', 'dark');
+                } else {
+                    html.removeAttribute('data-theme');
+                }
+                localStorage.setItem(storageKey, theme);
+            }
+
+            // Initialize theme on load
+            setTheme(getThemePreference());
+
+            // Toggle on click
+            themeToggle.addEventListener('click', function () {
+                var current = html.getAttribute('data-theme');
+                var next = current === 'dark' ? 'light' : 'dark';
+                setTheme(next);
+            });
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                if (!localStorage.getItem(storageKey)) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function () {
+            var btn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-list a').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
