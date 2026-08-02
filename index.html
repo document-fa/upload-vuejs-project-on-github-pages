@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>مستند جامع انتشار پروژه Vue-3 روی GitHub Pages</title>
+
+    <meta name="description"
+        content="آموزش جامع انتشار پروژه‌های Vue 3 روی GitHub Pages؛ از ساخت پروژه با Vite تا تنظیم Base URL، Build، Deploy، GitHub Actions، رفع خطاهای رایج و انتشار نسخه نهایی." />
+
+    <meta name="keywords"
+        content="Vue 3, Vue.js, GitHub Pages, Vite, Deploy Vue, انتشار Vue, آموزش Vue, GitHub Actions, GitHub Pages فارسی" />
+
+    <meta name="author" content="Document fa">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#42b883">
+
+<!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fa_IR">
+
+    <meta property="og:title" content="مستند جامع انتشار پروژه Vue-3 روی GitHub Pages" />
+
+    <meta property="og:description"
+        content="راهنمای کامل انتشار پروژه‌های Vue 3 روی GitHub Pages به زبان فارسی؛ شامل تنظیمات Vite، Base URL، Build، Deploy، GitHub Actions و رفع خطاهای رایج." />
+
+    <meta property="og:url" content="https://document-fa.github.io/upload-vuejs-project-on-github-pages/" />
+
+    <meta property="og:site_name" content="Document fa" />
+
+    <meta property="og:image"
+        content="https://document-fa.github.io/upload-vuejs-project-on-github-pages/public/preview.png" />
+
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+
+    <meta property="og:image:alt" content="مستند جامع انتشار پروژه Vue-3 روی GitHub Pages" />
+
+<!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="مستند جامع انتشار پروژه Vue-3 روی GitHub Pages" />
+
+    <meta name="twitter:description" content="آموزش گام‌به‌گام انتشار پروژه Vue 3 روی GitHub Pages به زبان فارسی." />
+
+    <meta name="twitter:image"
+        content="https://document-fa.github.io/upload-vuejs-project-on-github-pages/public/preview.png" />
+
+    <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"
+        type="text/css" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>راهنمای آپلود پروژه Vue-3 در GitHub Pages</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="vue-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--logos" width="37.07" height="36"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 198">
+                    <path fill="#41B883" d="M204.8 0H256L128 220.8L0 0h97.92L128 51.2L157.44 0h47.36Z"></path>
+                    <path fill="#41B883" d="m0 0l128 220.8L256 0h-51.2L128 132.48L50.56 0H0Z"></path>
+                    <path fill="#35495E" d="M50.56 0L128 133.12L204.8 0h-47.36L128 51.2L97.92 0H50.56Z"></path>
+                </svg>
+            </div>
+            <h1>راهنمای آپلود پروژه Vue-3 در GitHub Pages</h1>
+            <p>قدم به قدم، از صفر تا استقرار پروژه در GitHub Pages</p>
+            <div class="badge-row">
+                <span class="badge">Vue 3</span>
+                <span class="badge">GitHub Pages</span>
+                <span class="badge">Vite</span>
+                <span class="badge">رایگان</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h2>فهرست مطالب</h2>
+            <ol class="toc-list">
+                <li><a href="#prerequisites"><span class="step-num">۱</span> پیش‌نیازها و شرایط لازم</a></li>
+                <li><a href="#create-project"><span class="step-num">۲</span> ساخت پروژه Vue 3 با Vite</a></li>
+                <li><a href="#github-repo"><span class="step-num">۳</span> ساخت مخزن (Repository) در گیت‌هاب</a></li>
+                <li><a href="#push-code"><span class="step-num">۴</span> ارسال کد به گیت‌هاب</a></li>
+                <li><a href="#configure-base"><span class="step-num">۵</span> تنظیم مسیر پایه (Base Path)</a></li>
+                <li><a href="#gh-pages-deploy"><span class="step-num">۶</span> استقرار با gh-pages</a></li>
+                <li><a href="#github-actions"><span class="step-num">۷</span> استقرار با GitHub Actions (روش
+                        پیشرفته)</a></li>
+                <li><a href="#deploy"><span class="step-num">۸</span> اجرای نهایی و انتشار</a></li>
+                <li><a href="#custom-domain"><span class="step-num">۹</span> تنظیم دامنه اختصاصی (اختیاری)</a></li>
+                <li><a href="#troubleshooting"><span class="step-num">۱۰</span> عیب‌یابی و مشکلات رایج</a></li>
+            </ol>
+        </nav>
+
+        <!-- Section 1: Prerequisites -->
+        <section class="section" id="prerequisites">
+            <div class="section-header">
+                <div class="section-number">۱</div>
+                <h2>پیش‌نیازها و شرایط لازم</h2>
+            </div>
+
+            <p>قبل از شروع انتشار پروژه Vue 3 در GitHub Pages، مطمئن شوید که ابزارهای زیر را روی سیستم خود نصب دارید:
+            </p>
+
+            <div class="step">
+                <div class="step-icon">①</div>
+                <div>
+                    <strong>Node.js نسخه ۱۸ یا بالاتر</strong>
+                    <p>برای اجرای پروژه و مدیریت بسته‌ها نیاز به Node.js دارید.</p>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># بررسی نسخه Node.js
+node --version
+
+# بررسی نسخه npm
+npm --version</code></pre>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">②</div>
+                <div>
+                    <strong>Git نصب شده</strong>
+                    <p>برای مدیریت نسخه و ارسال کد به گیت‌هاب به Git نیاز دارید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">③</div>
+                <div>
+                    <strong>حساب کاربری گیت‌هاب</strong>
+                    <p>یک حساب رایگان در <span class="inline-code">github.com</span> داشته باشید.</p>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 نکته</div>
+                <p>اگر هنوز Node.js را نصب ندارید، از سایت رسمی <a href="https://nodejs.org"
+                        target="_blank">nodejs.org</a> نسخه LTS را دانلود و نصب کنید.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Create Project -->
+        <section class="section" id="create-project">
+            <div class="section-header">
+                <div class="section-number">۲</div>
+                <h2>ساخت پروژه Vue 3 با Vite</h2>
+            </div>
+
+            <p>با استفاده از دستور زیر یک پروژه جدید Vue 3 با ابزار Vite بسازید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># ساخت پروژه جدید Vue 3
+npm create vite@latest my-vue-app -- --template vue
+
+# ورود به پوشه پروژه
+cd my-vue-app
+
+# نصب وابستگی‌ها
+npm install
+
+# اجرای پروژه در حالت توسعه
+npm run dev</code></pre>
+            </div>
+
+            <p>بعد از اجرای دستور بالا، پروژه شما در آدرس <span class="inline-code">http://localhost:5173</span> اجرا
+                می‌شود.</p>
+
+            <div class="info-box">
+                <div class="info-title">✅ خوب است بدانید</div>
+                <p>Vite ابزار ساخت و باندل پروژه‌های فرانت‌اند است که سرعت بالایی در توسعه و ساخت (build) دارد و جایگزین
+                    Webpack در پروژه‌های Vue 3 شده است.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: GitHub Repo -->
+        <section class="section" id="github-repo">
+            <div class="section-header">
+                <div class="section-number">۳</div>
+                <h2>ساخت مخزن (Repository) در گیت‌هاب</h2>
+            </div>
+
+            <p>مراحل زیر را برای ساخت یک مخزن جدید در GitHub دنبال کنید:</p>
+
+            <div class="step">
+                <div class="step-icon">۱</div>
+                <div>
+                    <strong>وارد حساب گیت‌هاب خود شوید</strong>
+                    <p>به آدرس <span class="inline-code">github.com</span> بروید و وارد شوید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۲</div>
+                <div>
+                    <strong>مخزن جدید بسازید</strong>
+                    <p>روی دکمه <strong>+</strong> در بالای صفحه و سپس <strong>New repository</strong> کلیک کنید.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۳</div>
+                <div>
+                    <strong>نام مخزن را وارد کنید</strong>
+                    <p>نام مخزن باید با فرمت <span class="inline-code">username.github.io</span> باشد تا به عنوان سایت
+                        اصلی شما عمل کند، یا هر نام دیگری برای پروژه‌های فرعی.</p>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 نکته درباره نام مخزن</div>
+                <p>اگر نام مخزن را <span class="inline-code">username.github.io</span> بگذارید (جایی که username نام
+                    کاربری شماست)، سایت شما در آدرس <span class="inline-code">https://username.github.io</span> نمایش
+                    داده می‌شود. اگر نام دیگری مثل <span class="inline-code">my-project</span> بگذارید، آدرس سایت <span
+                        class="inline-code">https://username.github.io/my-project</span> خواهد بود.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۴</div>
+                <div>
+                    <strong>مخزن را خالی نگه دارید</strong>
+                    <p>گزینه‌های اضافی مثل README یا .gitignore را فعال نکنید. مخزن کاملاً خالی باشد.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Push Code -->
+        <section class="section" id="push-code">
+            <div class="section-header">
+                <div class="section-number">۴</div>
+                <h2>ارسال کد به گیت‌هاب</h2>
+            </div>
+
+            <p>حالا باید کد پروژه خود را به مخزن گیت‌هاب ارسال کنید. دستورات زیر را در ترمینال و در پوشه پروژه اجرا
+                کنید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># مقداردهی اولیه مخزن گیت
+git init
+
+# اضافه کردن تمام فایل‌ها
+git add .
+
+# ایجاد اولین کامیت
+git commit -m "اولین کامیت - پروژه Vue 3"
+
+# تنظیم شاخه اصلی
+git branch -M main
+
+# اضافه کردن مخزن ریموت (نام کاربری خود را جایگزین کنید)
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+
+# ارسال کد به گیت‌هاب
+git push -u origin main</code></pre>
+            </div>
+
+            <div class="info-box warning">
+                <div class="info-title">⚠️ مهم</div>
+                <p>به جای <span class="inline-code">YOUR-USERNAME</span> نام کاربری گیت‌هاب خود و به جای <span
+                        class="inline-code">YOUR-REPO-NAME</span> نام مخزنی که ساختید را وارد کنید.</p>
+            </div>
+
+            <h3>احراز هویت با GitHub CLI (اختیاری)</h3>
+            <p>اگر با مشکل احراز هویت مواجه شدید، می‌توانید از <span class="inline-code">GitHub CLI</span> استفاده کنید:
+            </p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># نصب GitHub CLI
+sudo apt install gh
+
+# ورود به حساب
+gh auth login</code></pre>
+            </div>
+        </section>
+
+        <!-- Section 5: Configure Base -->
+        <section class="section" id="configure-base">
+            <div class="section-header">
+                <div class="section-number">۵</div>
+                <h2>تنظیم مسیر پایه (Base Path)</h2>
+            </div>
+
+            <p>یکی از مهم‌ترین مراحل، تنظیم <span class="inline-code">base</span> در فایل <span
+                    class="inline-code">vite.config.js</span> است. این تنظیم مشخص می‌کند که فایل‌های پروژه در چه مسیری
+                قرار می‌گیرند.</p>
+
+            <h3>حالت ۱: پروژه اصلی (username.github.io)</h3>
+            <p>اگر نام مخزن شما <span class="inline-code">username.github.io</span> باشد:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: '/',  // برای پروژه اصلی
+})</code></pre>
+                </div>
+            </div>
+
+            <h3>حالت ۲: پروژه فرعی (username.github.io/my-project)</h3>
+            <p>اگر نام مخزن شما مثلاً <span class="inline-code">my-project</span> باشد:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: '/my-project/',  // نام مخزن خود را اینجا قرار دهید
+})</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box warning">
+                <div class="info-title">⚠️ نکته حیاتی</div>
+                <p>اگر <span class="inline-code">base</span> را به درستی تنظیم نکنید، تمام فایل‌های CSS، JavaScript و
+                    تصاویر پروژه شما یافت نخواهند شد و صفحه سفید می‌بینید!</p>
+            </div>
+
+            <h3>روش خودکار (پیشنهادی)</h3>
+            <p>می‌توانید <span class="inline-code">base</span> را بر اساس محیط اجرا تنظیم کنید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 vite.config.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  base: process.env.NODE_ENV === 'production' 
+    ? '/my-project/' 
+    : '/',
+})</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: gh-pages -->
+        <section class="section" id="gh-pages-deploy">
+            <div class="section-header">
+                <div class="section-number">۶</div>
+                <h2>استقرار با بسته gh-pages</h2>
+            </div>
+
+            <p>ساده‌ترین روش برای انتشار پروژه Vue 3 در GitHub Pages، استفاده از بسته <span
+                    class="inline-code">gh-pages</span> است.</p>
+
+            <h3>مرحله ۱: نصب بسته gh-pages</h3>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code>npm install -D gh-pages</code></pre>
+            </div>
+
+            <h3>مرحله ۲: اضافه کردن اسکریپت به package.json</h3>
+
+            <div class="config-file">
+                <div class="file-name">📄 package.json</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">json</span>
+                    </div>
+                    <pre><code>{
+  "name": "my-vue-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "dependencies": {
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "gh-pages": "^6.1.0",
+    "vite": "^5.0.0"
+  }
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box info">
+                <div class="info-title">💡 توضیح اسکریپت‌ها</div>
+                <p><span class="inline-code">predeploy</span>: قبل از اجرای deploy، به صورت خودکار اجرا می‌شود و پروژه
+                    را build می‌کند.</p>
+                <p><span class="inline-code">deploy</span>: محتوای پوشه <span class="inline-code">dist</span> را به شاخه
+                    <span class="inline-code">gh-pages</span> ارسال می‌کند.
+                </p>
+            </div>
+
+            <h3>مرحله ۳: اجرای استقرار</h3>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># اجرای استقرار
+npm run deploy</code></pre>
+            </div>
+
+            <p>بعد از اجرای این دستور، پروژه شما به صورت خودکار build شده و در GitHub Pages منتشر می‌شود.</p>
+        </section>
+
+        <!-- Section 7: GitHub Actions -->
+        <section class="section" id="github-actions">
+            <div class="section-header">
+                <div class="section-number">۷</div>
+                <h2>استقرار با GitHub Actions (روش پیشرفته)</h2>
+            </div>
+
+            <p>روش حرفه‌ای‌تر استفاده از <strong>GitHub Actions</strong> است که به صورت خودکار پروژه شما را در هر بار
+                push به شاخه <span class="inline-code">main</span> build و deploy می‌کند.</p>
+
+            <h3>مرحله ۱: فعال‌سازی GitHub Pages</h3>
+            <p>در صفحه مخزن خود در گیت‌هاب:</p>
+            <ol>
+                <li>به بخش <strong>Settings</strong> بروید</li>
+                <li>از منوی سمت راست روی <strong>Pages</strong> کلیک کنید</li>
+                <li>در بخش <strong>Source</strong> گزینه <strong>GitHub Actions</strong> را انتخاب کنید</li>
+            </ol>
+
+            <h3>مرحله ۲: ساخت فایل Workflow</h3>
+            <p>فایل زیر را در مسیر <span class="inline-code">.github/workflows/deploy.yml</span> بسازید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 .github/workflows/deploy.yml</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">yaml</span>
+                    </div>
+                    <pre><code>name: Deploy Vue 3 to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build with Vite
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4</code></pre>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">✅ مزایای GitHub Actions</div>
+                <ul>
+                    <li>استقرار خودکار در هر بار push به شاخه main</li>
+                    <li>نیازی به نصب بسته gh-pages نیست</li>
+                    <li>امکان استقرار چند پروژه با workflow‌های جداگانه</li>
+                    <li>مدیریت نسخه و تاریخچه استقرار</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 8: Final Deploy -->
+        <section class="section" id="deploy">
+            <div class="section-header">
+                <div class="section-number">۸</div>
+                <h2>اجرای نهایی و انتشار</h2>
+            </div>
+
+            <p>مراحل نهایی برای انتشار پروژه:</p>
+
+            <div class="step">
+                <div class="step-icon">۱</div>
+                <div>
+                    <strong>ساخت پروژه</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run build</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۲</div>
+                <div>
+                    <strong>پیش‌نمایش محلی</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run preview</code></pre>
+                    </div>
+                    <p>پروژه را در حالت پیش‌نمایش بررسی کنید تا مطمئن شوید همه چیز درست کار می‌کند.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۳</div>
+                <div>
+                    <strong>ارسال تغییرات به گیت‌هاب</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>git add .
+git commit -m "تنظیم استقرار در GitHub Pages"
+git push origin main</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-icon">۴</div>
+                <div>
+                    <strong>انتشار با gh-pages (اگر از روش gh-pages استفاده می‌کنید)</strong>
+                    <div class="code-block" style="margin-top: 8px;">
+                        <div class="code-header">
+                            <div class="dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="lang">terminal</span>
+                        </div>
+                        <pre><code>npm run deploy</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">🎉 تبریک!</div>
+                <p>پروژه Vue 3 شما اکنون در GitHub Pages منتشر شده است! چند دقیقه صبر کنید و سپس آدرس سایت خود را در
+                    مرورگر باز کنید.</p>
+            </div>
+        </section>
+
+        <!-- Section 9: Custom Domain -->
+        <section class="section" id="custom-domain">
+            <div class="section-header">
+                <div class="section-number">۹</div>
+                <h2>تنظیم دامنه اختصاصی (اختیاری)</h2>
+            </div>
+
+            <p>اگر می‌خواهید از دامنه اختصاصی خود استفاده کنید، مراحل زیر را دنبال کنید:</p>
+
+            <h3>مرحله ۱: ساخت فایل CNAME</h3>
+
+            <div class="config-file">
+                <div class="file-name">📄 public/CNAME</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">text</span>
+                    </div>
+                    <pre><code>yourdomain.com</code></pre>
+                </div>
+            </div>
+
+            <h3>مرحله ۲: تنظیم DNS</h3>
+            <p>در تنظیمات DNS دامنه خود، رکوردهای زیر را اضافه کنید:</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">dns</span>
+                </div>
+                <pre><code># رکورد A
+Type: A
+Name: @
+Value: 185.199.108.153
+
+Type: A
+Name: @
+Value: 185.199.109.153
+
+Type: A
+Name: @
+Value: 185.199.110.153
+
+Type: A
+Name: @
+Value: 185.199.111.153
+
+# رکورد CNAME (فقط برای ساب‌دامنه)
+Type: CNAME
+Name: www
+Value: username.github.io</code></pre>
+            </div>
+
+            <h3>مرحله ۳: فعال‌سازی HTTPS</h3>
+            <p>در بخش Pages تنظیمات مخزن، گزینه <strong>Enforce HTTPS</strong> را فعال کنید.</p>
+
+            <div class="info-box info">
+                <div class="info-title">💡 زمان اعمال تغییرات DNS</div>
+                <p>تغییرات DNS ممکن است تا ۲۴ ساعت زمان ببرد تا فعال شوند. صبور باشید.</p>
+            </div>
+        </section>
+
+        <!-- Section 10: Troubleshooting -->
+        <section class="section" id="troubleshooting">
+            <div class="section-header">
+                <div class="section-number">۱۰</div>
+                <h2>عیب‌یابی و مشکلات رایج</h2>
+            </div>
+
+            <h3>❌ صفحه سفید نمایش داده می‌شود</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>تنظیم <span class="inline-code">base</span> در فایل <span class="inline-code">vite.config.js</span>
+                    اشتباه است.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> مقدار <span class="inline-code">base</span> را مطابق با نام مخزن خود تنظیم کنید.
+                (بخش ۵ را مرور کنید)</p>
+
+            <h3>❌ فایل‌های CSS و JS یافت نمی‌شوند</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>مسیرهای مطلق در کد شما با GitHub Pages سازگار نیستند.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> از مسیرهای نسبی استفاده کنید و مطمئن شوید <span class="inline-code">base</span>
+                به درستی تنظیم شده است.</p>
+
+            <h3>❌ خطا در مسیرهای روتینگ (Router)</h3>
+            <div class="info-box warning">
+                <div class="info-title">🔍 علت احتمالی</div>
+                <p>اگر از Vue Router با حالت history استفاده می‌کنید، GitHub Pages از آن پشتیبانی نمی‌کند.</p>
+            </div>
+            <p><strong>راه‌حل:</strong> از حالت <span class="inline-code">hash</span> در Vue Router استفاده کنید:</p>
+
+            <div class="config-file">
+                <div class="file-name">📄 src/router/index.js</div>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="lang">javascript</span>
+                    </div>
+                    <pre><code>import { createRouter, createWebHashHistory } from 'vue-router'
+
+const router = createRouter({
+  history: createWebHashHistory(),  // ← استفاده از hash mode
+  routes: [
+    // مسیرهای خود را اینجا تعریف کنید
+  ]
+})
+
+export default router</code></pre>
+                </div>
+            </div>
+
+            <h3>❌ خطای 404 هنگام بارگذاری مستقیم صفحات</h3>
+            <div class="info-box info">
+                <div class="info-title">💡 راه‌حل</div>
+                <p>GitHub Pages فقط فایل <span class="inline-code">index.html</span> اصلی را سرو می‌کند. برای روتینگ، از
+                    hash mode استفاده کنید یا فایل <span class="inline-code">404.html</span> سفارشی بسازید.</p>
+            </div>
+
+            <h3>❌ بسته gh-pages خطا می‌دهد</h3>
+            <p>اگر با خطای مجوز مواجه شدید:</p>
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="lang">terminal</span>
+                </div>
+                <pre><code># تنظیم نام کاربری و ایمیل گیت
+git config user.name "YOUR-USERNAME"
+git config user.email "YOUR-EMAIL@example.com"
+
+# دوباره اجرا کنید
+npm run deploy</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>ساخته شده با ❤️ برای جامعه توسعه‌دهندگان فارسی‌زبان</p>
+        <p style="margin-top: 10px; font-size: 0.85rem; opacity: 0.6;">آخرین به‌روزرسانی: مرداد ۱۴۰۵</p>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="themeToggle" title="تغییر حالت نمایش">
+        <span class="icon-moon">🌙</span>
+        <span class="icon-sun">☀️</span>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
